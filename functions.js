@@ -5,7 +5,7 @@ const checkLengthLine = function (line, maxLength) {
 const checkPalindrome = function (line) {
   const newLine = line.replaceAll().toLowerCase();
   let invertedLine;
-  for (let i = newLine.length - 1; i !== 0 ;i--) {
+  for (let i = newLine.length - 1; i > 0 ;i--) {
     invertedLine += newLine[i];
   }
   return invertedLine === newLine;
