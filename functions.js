@@ -1,29 +1,20 @@
-const checkLengthLine = function (line, maxLength) {
+function isLengthLine (line, maxLength) {
   return line.length <= maxLength;
-};
+}
 
-const checkPalindrome = function (line) {
-  const newLine = line.replaceAll().toLowerCase();
-  let invertedLine;
-  for (let i = newLine.length - 1; i > 0 ;i--) {
+function isPalindrome (line) {
+  const newLine = line.replaceAll(' ', '').toLowerCase();
+  let invertedLine = '';
+  for (let i = newLine.length - 1; i >= 0 ;i--) {
     invertedLine += newLine[i];
   }
   return invertedLine === newLine;
-};
+}
 
-const extractNumber = function(line){
-  line = toString(line);
-  let number;
-  for (let i = 0; i < line.length;i++) {
-    if (Number.isNaN(line[i])){
-      number += line[i];
-    }
-  }
-  return Number.isNaN(number);
-};
-
-checkLengthLine('проверяемая строка', 20);
-checkLengthLine('проверяемая строка', 18);
-checkLengthLine('проверяемая строка', 10);
-checkPalindrome('Лёша на полке клопа нашёл ');
-extractNumber('2023 год');
+console.log(isLengthLine('проверяемая строка', 20));
+console.log(isLengthLine('проверяемая строка', 18));
+console.log(isLengthLine('проверяемая строка', 10));
+console.log(isPalindrome('топот'));
+console.log(isPalindrome('ДовОд'));
+console.log(isPalindrome('Кекс'));
+console.log(isPalindrome('Лёша на полке клопа нашёл '));
