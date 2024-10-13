@@ -2,13 +2,13 @@ function isLengthLine (line, maxLength) {
   return line.length <= maxLength;
 }
 
-function isPalindrome (line) {
-  const newLine = line.replaceAll(' ', '').toLowerCase();
+function isPalindrome (str) {
+  const line = str.replaceAll(' ', '').toLowerCase();
   let invertedLine = '';
-  for (let i = newLine.length - 1; i >= 0 ;i--) {
-    invertedLine += newLine[i];
+  for (let i = line.length - 1; i >= 0 ;i--) {
+    invertedLine += line[i];
   }
-  return invertedLine === newLine;
+  return invertedLine === line;
 }
 
 console.log(isLengthLine('проверяемая строка', 20));
