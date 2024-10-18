@@ -44,19 +44,25 @@ const GetRandomUniqueNumberGenerate = (a, b) => {
   return generator();
 };
 
-const GreatDescriptinPhoto = () => ({
-  id: GetRandomUniqueNumberGenerate(1, 25),
-  url: `photos/${GetRandomUniqueNumberGenerate(1, 25)}.jpg`,
-  description: DESCRIPTION[GetRandomUniqueNumberGenerate(0, DESCRIPTION.length - 1)],
-  likes: GetRandomUniqueNumberGenerate(15, 200),
-  comments: {
-    id: Math.round(Math.random() * 1000),
-    avatar: `img/avatar-${GetRandomUniqueNumberGenerate(1, 6)}.svg`,
-    message: MESSAGE[GetRandomUniqueNumberGenerate(0, MESSAGE.length - 1)],
-    name: NAME[GetRandomUniqueNumberGenerate(0, NAME.length - 1)],
+const GreatDescriptinPhoto = () =>{
+  const comments = [];
+  for (let i = 0; i < GetRandomInt(0, 30); i++){
+    comments.push({
+      id: GetRandomUniqueNumberGenerate(1, 10000),
+      avatar: `img/avatar-${GetRandomInt(1, 6)}.svg`,
+      message: MESSAGE[GetRandomInt(0, MESSAGE.length - 1)],
+      name: NAME[GetRandomInt(0, NAME.length - 1)],
+    });
   }
-});
-const similarDescriptionPhoto = Array.from({length: 25}, GreatDescriptinPhoto);
+  return {
+    id: GetRandomUniqueNumberGenerate(1, 25),
+    url: `photos/${GetRandomUniqueNumberGenerate(1, 25)}.jpg`,
+    description: DESCRIPTION[GetRandomInt(0, DESCRIPTION.length - 1)],
+    likes: GetRandomInt(15, 200),
+    comments: comments,
+  };
+};
 
+const similarDescriptionPhoto = Array.from({length: 25}, GreatDescriptinPhoto);
 
 console.log(similarDescriptionPhoto);
