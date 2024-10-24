@@ -64,4 +64,3 @@ const GreatDescriptinPhoto = () =>{
 };
 
 const similarDescriptionPhoto = Array.from({length: 25}, GreatDescriptinPhoto);
-console.log(similarDescriptionPhoto);
