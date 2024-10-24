@@ -28,10 +28,10 @@ const NAME = [
   'Вера',
   'Регина'
 ];
-
-const GetRandomUniqueNumberGenerate = (a, b) => {
-  const usedArray = [];
-
+const idCommentsArray = [];
+const idArray = [];
+const numbersPhotoArray = [];
+const GetRandomUniqueNumberGenerate = (a, b, usedArray) => {
   const generator = () => {
     const newNumber = GetRandomInt(a, b);
     if (usedArray.includes(newNumber)){
@@ -48,15 +48,15 @@ const GreatDescriptinPhoto = () =>{
   const comments = [];
   for (let i = 0; i < GetRandomInt(0, 30); i++){
     comments.push({
-      id: GetRandomUniqueNumberGenerate(1, 10000),
+      id: GetRandomUniqueNumberGenerate(1, 10000, idCommentsArray),
       avatar: `img/avatar-${GetRandomInt(1, 6)}.svg`,
       message: MESSAGE[GetRandomInt(0, MESSAGE.length - 1)],
       name: NAME[GetRandomInt(0, NAME.length - 1)],
     });
   }
   return {
-    id: GetRandomUniqueNumberGenerate(1, 25),
-    url: `photos/${GetRandomUniqueNumberGenerate(1, 25)}.jpg`,
+    id: GetRandomUniqueNumberGenerate(1, 25, idArray),
+    url: `photos/${GetRandomUniqueNumberGenerate(1, 25, numbersPhotoArray)}.jpg`,
     description: DESCRIPTION[GetRandomInt(0, DESCRIPTION.length - 1)],
     likes: GetRandomInt(15, 200),
     comments: comments,
