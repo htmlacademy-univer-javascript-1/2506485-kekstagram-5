@@ -44,7 +44,7 @@ const GetRandomUniqueNumberGenerate = (a, b, usedArray) => {
   return generator();
 };
 
-const GreatDescriptinPhoto = () =>{
+const CreateDescriptionPhoto = () =>{
   const comments = [];
   for (let i = 0; i < GetRandomInt(0, 30); i++){
     comments.push({
@@ -63,4 +63,4 @@ const GreatDescriptinPhoto = () =>{
   };
 };
 
-const similarDescriptionPhoto = Array.from({length: 25}, GreatDescriptinPhoto);
+const similarDescriptionPhoto = Array.from({length: 25}, CreateDescriptionPhoto);
