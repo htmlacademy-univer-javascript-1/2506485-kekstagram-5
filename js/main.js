@@ -64,3 +64,4 @@ const CreateDescriptionPhoto = () =>{
 };
 
 const similarDescriptionPhoto = Array.from({length: 25}, CreateDescriptionPhoto);
+console.log(similarDescriptionPhoto);
