@@ -46,5 +46,5 @@ const CreateDescriptionPhoto = () =>{
   };
 };
 
-const CreatDescriptionPhotos = () => Array.from({length: 25}, CreateDescriptionPhoto);
-export {CreatDescriptionPhotos};
+const CreateDescriptionPhotos = () => Array.from({length: 25}, CreateDescriptionPhoto);
+export {CreateDescriptionPhotos};
