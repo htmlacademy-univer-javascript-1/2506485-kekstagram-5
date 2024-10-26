@@ -1,6 +1,6 @@
 const GetRandomInt = (a, b) => {
-  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
-  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
@@ -44,6 +44,8 @@ const GetRandomUniqueNumberGenerate = (a, b, usedArray) => {
   return generator();
 };
 
+const descriptionPhotoCount = 25;
+
 const CreateDescriptionPhoto = () =>{
   const comments = [];
   for (let i = 0; i < GetRandomInt(0, 30); i++){
@@ -55,13 +57,13 @@ const CreateDescriptionPhoto = () =>{
     });
   }
   return {
-    id: GetRandomUniqueNumberGenerate(1, 25, idArray),
-    url: `photos/${GetRandomUniqueNumberGenerate(1, 25, numbersPhotoArray)}.jpg`,
+    id: GetRandomUniqueNumberGenerate(1, descriptionPhotoCount, idArray),
+    url: `photos/${GetRandomUniqueNumberGenerate(1, descriptionPhotoCount, numbersPhotoArray)}.jpg`,
     description: DESCRIPTION[GetRandomInt(0, DESCRIPTION.length - 1)],
     likes: GetRandomInt(15, 200),
     comments: comments,
   };
 };
 
-const similarDescriptionPhoto = Array.from({length: 25}, CreateDescriptionPhoto);
-console.log(similarDescriptionPhoto);
+const similarDescriptionPhoto = () => Array.from({length: descriptionPhotoCount}, CreateDescriptionPhoto);
+similarDescriptionPhoto();
