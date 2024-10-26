@@ -1,4 +1,4 @@
-const GetRandomInt = (a, b) => {
+const getRandomInt = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
   const result = Math.random() * (upper - lower + 1) + lower;
@@ -31,9 +31,9 @@ const NAME = [
 const idCommentsArray = [];
 const idArray = [];
 const numbersPhotoArray = [];
-const GetRandomUniqueNumberGenerate = (a, b, usedArray) => {
+const getRandomUniqueNumberGenerate = (a, b, usedArray) => {
   const generator = () => {
-    const newNumber = GetRandomInt(a, b);
+    const newNumber = getRandomInt(a, b);
     if (usedArray.includes(newNumber)){
       return generator ();
     }
@@ -46,24 +46,24 @@ const GetRandomUniqueNumberGenerate = (a, b, usedArray) => {
 
 const descriptionPhotoCount = 25;
 
-const CreateDescriptionPhoto = () =>{
+const createDescriptionPhoto = () =>{
   const comments = [];
-  for (let i = 0; i < GetRandomInt(0, 30); i++){
+  for (let i = 0; i < getRandomInt(0, 30); i++){
     comments.push({
-      id: GetRandomUniqueNumberGenerate(1, 10000, idCommentsArray),
-      avatar: `img/avatar-${GetRandomInt(1, 6)}.svg`,
-      message: MESSAGE[GetRandomInt(0, MESSAGE.length - 1)],
-      name: NAME[GetRandomInt(0, NAME.length - 1)],
+      id: getRandomUniqueNumberGenerate(1, 10000, idCommentsArray),
+      avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+      message: MESSAGE[getRandomInt(0, MESSAGE.length - 1)],
+      name: NAME[getRandomInt(0, NAME.length - 1)],
     });
   }
   return {
-    id: GetRandomUniqueNumberGenerate(1, descriptionPhotoCount, idArray),
-    url: `photos/${GetRandomUniqueNumberGenerate(1, descriptionPhotoCount, numbersPhotoArray)}.jpg`,
-    description: DESCRIPTION[GetRandomInt(0, DESCRIPTION.length - 1)],
-    likes: GetRandomInt(15, 200),
+    id: getRandomUniqueNumberGenerate(1, descriptionPhotoCount, idArray),
+    url: `photos/${getRandomUniqueNumberGenerate(1, descriptionPhotoCount, numbersPhotoArray)}.jpg`,
+    description: DESCRIPTION[getRandomInt(0, DESCRIPTION.length - 1)],
+    likes: getRandomInt(15, 200),
     comments: comments,
   };
 };
 
-const similarDescriptionPhoto = () => Array.from({length: descriptionPhotoCount}, CreateDescriptionPhoto);
+const similarDescriptionPhoto = () => Array.from({length: descriptionPhotoCount}, createDescriptionPhoto);
 similarDescriptionPhoto();
