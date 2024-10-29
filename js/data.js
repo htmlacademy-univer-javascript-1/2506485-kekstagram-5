@@ -47,5 +47,5 @@ const createDescriptionPhoto = () =>{
     comments: comments,
   };
 };
-const similarDescriptionPhoto = Array.from({length: 25}, createDescriptionPhoto);
+const similarDescriptionPhoto = () => Array.from({length: 25}, createDescriptionPhoto);
 export {similarDescriptionPhoto};
