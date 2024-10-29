@@ -1,1 +1,1 @@
-import {similarDescriptionPhoto} from './date';
+import {similarDescriptionPhoto} from './data';
