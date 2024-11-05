@@ -1,1 +1,1 @@
-import './picture';
+import './picture.js';
