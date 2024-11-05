@@ -1,2 +1,1 @@
-import {similarDescriptionPhoto} from './data';
-similarDescriptionPhoto();
+import './picture';
