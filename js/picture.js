@@ -1,4 +1,4 @@
-import {similarDescriptionPhoto} from './data';
+import {similarDescriptionPhoto} from './data.js';
 
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 const similarListElement = document.querySelector('.pictures');
