@@ -1,2 +1,1 @@
-
-import {similarDescriptionPhoto} from './date';
+import './picture.js';
