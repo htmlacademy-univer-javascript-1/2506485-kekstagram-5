@@ -3,22 +3,13 @@ const userFullPhoto = document.querySelector('.big-picture');
 const similarListElement = document.querySelector('.pictures');
 const closeButton = userFullPhoto.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
+const commentContainer = userFullPhoto.querySelector('.social__comments');
+const fullPicturesImg = userFullPhoto.querySelector('.big-picture__img img');
+const fullPicturesLikes = userFullPhoto.querySelector('.likes-count');
+const fullPicturesCommentsCount = userFullPhoto.querySelector('.comments-count');
+const fullPicturesDescription = userFullPhoto.querySelector('.social__caption')
 
-similarListElement.addEventListener('click', (evt) => {
-  userFullPhoto.classList.remove('hidden');
-  body.classList.add('modal-open');
-  const target = evt.target.closest('.picture');
-  const imageSrc = target.querySelector('.picture__img').src;
-  const likes = target.querySelector('.picture__likes').textContent;
-  userFullPhoto.querySelector('.social__comment-count').classList.add('hidden');
-  userFullPhoto.querySelector('.comments-loader').classList.add('hidden');
-  userFullPhoto.querySelector('.big-picture__img img').src = imageSrc;
-  userFullPhoto.querySelector('.likes-count').textContent = likes;
-  userFullPhoto.querySelector('.comments-count').textContent = target.querySelector('.picture__comments').textContent;
-  userFullPhoto.querySelector('.social__caption').textContent = target.querySelector('.picture__img').alt;
-  const array = JSON.parse(target.querySelector('.picture__comments').dataset.array);
-  const commentContainer = userFullPhoto.querySelector('.social__comments');
-  commentContainer.innerHTML = '';
+const addComments = (array) => {
   for (let i = 0; i < array.length; i++){
     const element = document.createElement('li');
     element.classList.add('social__comment');
@@ -35,6 +26,21 @@ similarListElement.addEventListener('click', (evt) => {
     element.appendChild(text);
     commentContainer.appendChild(element);
   }
+};
+
+similarListElement.addEventListener('click', (evt) => {
+  userFullPhoto.classList.remove('hidden');
+  body.classList.add('modal-open');
+  const target = evt.target.closest('.picture');
+  const imageSrc = target.querySelector('.picture__img').src;
+  const likes = target.querySelector('.picture__likes').textContent;
+  fullPicturesImg.src = imageSrc;
+  fullPicturesLikes.textContent = likes;
+  fullPicturesCommentsCount.textContent = target.querySelector('.picture__comments').textContent;
+  fullPicturesDescription.textContent = target.querySelector('.picture__img').alt;
+  const array = JSON.parse(target.querySelector('.picture__comments').dataset.array);
+  commentContainer.innerHTML = '';
+  addComments(array);
 });
 
 document.addEventListener('keydown', (evt) => {
