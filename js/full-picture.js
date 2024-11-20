@@ -7,7 +7,7 @@ const commentContainer = userFullPhoto.querySelector('.social__comments');
 const fullPicturesImg = userFullPhoto.querySelector('.big-picture__img img');
 const fullPicturesLikes = userFullPhoto.querySelector('.likes-count');
 const fullPicturesCommentsCount = userFullPhoto.querySelector('.comments-count');
-const fullPicturesDescription = userFullPhoto.querySelector('.social__caption')
+const fullPicturesDescription = userFullPhoto.querySelector('.social__caption');
 
 const addComments = (array) => {
   for (let i = 0; i < array.length; i++){
