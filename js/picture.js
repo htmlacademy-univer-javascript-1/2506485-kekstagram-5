@@ -11,6 +11,7 @@ similarPictures.forEach((picture) => {
   elementPictures.querySelector('.picture__img').alt = picture.description;
   elementPictures.querySelector('.picture__likes').textContent = picture.likes;
   elementPictures.querySelector('.picture__comments').textContent = picture.comments.length;
+  elementPictures.querySelector('.picture__comments').dataset.array = JSON.stringify(picture.comments);
   similarListFragment.appendChild(elementPictures);
 });
 similarListElement.appendChild(similarListFragment);

@@ -3,7 +3,10 @@ import {getRandomInt, getRandomUniqueNumberGenerate} from './util.js';
 const DESCRIPTION = [
   'Очень красивое небо',
   'Жизнь - это суп и ты в ней вилка',
-  'Я кот по жизни'
+  'Я кот по жизни',
+  'Лучший день',
+  'Прекрасный вечер',
+  'Очень красивый закат'
 ];
 
 const MESSAGE = [
