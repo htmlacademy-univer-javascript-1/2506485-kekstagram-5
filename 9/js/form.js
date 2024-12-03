@@ -5,8 +5,8 @@ const buttonCloseForm = document.querySelector('.img-upload__cancel');
 const hashtagsField = document.querySelector('.text__hashtags');
 const comments = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
-const hashtagRegex = /#[a-zа-яё0-9]{1,19}$/i;
-let messageError = '';
+const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
+const messageError = ['превышено количество хэш-тегов', 'введён невалидный хэш-тег', 'хэш-теги повторяются'];
 
 const onDocumentKeydown = (evt) =>{
   if (evt.key === 'Escape'){
@@ -17,29 +17,29 @@ const onDocumentKeydown = (evt) =>{
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper'
 });
 
+const normalizationHashtag = (hashtags) => hashtags.trim().split(' ').filter((tag) => Boolean(tag.length));
+
 const validateHashtags = (hashtags) => {
-  let isValid = true;
-  const hashtagArray = hashtags.split(' ');
-  if (hashtagArray.length > 5) {
-    isValid = false;
-    messageError = 'превышено количество хэш-тегов';
-  }
-  for (const hashtag in hashtags){
-    if (!hashtagRegex.test(hashtag) || hashtag.length > 20){
-      isValid = false;
-      messageError = 'введён невалидный хэш-тег';
-    }
-    if (hashtags.indexOf(hashtag) !== hashtags.lastIndexOf(hashtag)) {
-      isValid = false;
-      messageError = 'хэш-теги повторяются';
-    }
-  }
-  return isValid;
+  const hashtagArray = normalizationHashtag(hashtags);
+  return hashtagArray.every((tag) => hashtagRegex.test(tag));
 };
 
-pristine.addValidator(hashtagsField, validateHashtags, messageError);
+const validateHashtagsCount = (hashtags) =>{
+  const hashtagArray = normalizationHashtag(hashtags);
+  return hashtagArray.length <= 5;
+};
+
+const validateHashtagsUnique = (hashtags) =>{
+  const hashtagArray = normalizationHashtag(hashtags).map((tag) => tag.toLowerCase());
+  return hashtagArray.length === new Set(hashtagArray).size;
+};
+
+pristine.addValidator(hashtagsField, validateHashtagsCount, messageError[0], 3, true);
+pristine.addValidator(hashtagsField, validateHashtags, messageError[1], 2, true);
+pristine.addValidator(hashtagsField, validateHashtagsUnique, messageError[2], 1, true);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -70,10 +70,11 @@ comments.addEventListener('keydown', (evt) =>{
 function closeForm (){
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  fileInput.value = '';
-  hashtagsField.value = '';
-  comments.value = '';
-  messageError = '';
-
+  //fileInput.value = '';
+  form.reset();
+  //hashtagsField.value = '';
+  //comments.value = '';
+  pristine.reset();
+  //messageError = '';
   document.removeEventListener('keydown', onDocumentKeydown);
 }
