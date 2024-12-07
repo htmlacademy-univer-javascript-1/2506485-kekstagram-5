@@ -1,4 +1,7 @@
 import './picture.js';
+
+const COMMENTS_PER_PORTION = 5;
+
 const userFullPhoto = document.querySelector('.big-picture');
 const pictureElementList = document.querySelector('.pictures');
 const closeButton = userFullPhoto.querySelector('.big-picture__cancel');
@@ -16,8 +19,8 @@ const renderingComments = (arrayComments, i, countClickOnButton) =>{
   element.classList.add('social__comment');
   const image = document.createElement('img');
   image.classList.add('social__picture');
-  image.src = arrayComments[countClickOnButton * 5 + i].avatar;
-  image.alt = arrayComments[countClickOnButton * 5 + i].name;
+  image.src = arrayComments[countClickOnButton * COMMENTS_PER_PORTION + i].avatar;
+  image.alt = arrayComments[countClickOnButton * COMMENTS_PER_PORTION + i].name;
   image.width = 35;
   image.height = 35;
   const text = document.createElement('p');
@@ -31,7 +34,7 @@ const renderingComments = (arrayComments, i, countClickOnButton) =>{
 const addComments = (arrayComments, countClickOnButton) => {
   const length = arrayComments.length;
   for (let i = 0; i < 5; i++){
-    if (length > (countClickOnButton * 5 + i)){
+    if (length > (countClickOnButton * COMMENTS_PER_PORTION + i)){
       renderingComments(arrayComments, i, countClickOnButton);
     }
     commentsCount.textContent = `${document.querySelectorAll('.social__comment').length} из ${length} комментариев`;
