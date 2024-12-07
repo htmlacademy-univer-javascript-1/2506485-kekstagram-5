@@ -1,3 +1,5 @@
+import { resetScale } from './scale.js';
+import {resertEffects, setEffectsSlider} from './effect.js';
 const fileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -6,7 +8,10 @@ const hashtagsField = document.querySelector('.text__hashtags');
 const comments = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
-const messageError = ['превышено количество хэш-тегов', 'введён невалидный хэш-тег', 'хэш-теги повторяются'];
+const messageError = {
+  errorCountHashtag: 'превышено количество хэш-тегов',
+  errorNotValidateHastag: 'введён невалидный хэш-тег',
+  errorUniqueHashtag: 'хэш-теги повторяются'};
 
 const onDocumentKeydown = (evt) =>{
   if (evt.key === 'Escape'){
@@ -37,9 +42,9 @@ const validateHashtagsUnique = (hashtags) =>{
   return hashtagArray.length === new Set(hashtagArray).size;
 };
 
-pristine.addValidator(hashtagsField, validateHashtagsCount, messageError[0], 3, true);
-pristine.addValidator(hashtagsField, validateHashtags, messageError[1], 2, true);
-pristine.addValidator(hashtagsField, validateHashtagsUnique, messageError[2], 1, true);
+pristine.addValidator(hashtagsField, validateHashtagsCount, messageError.errorCountHashtag, 3, true);
+pristine.addValidator(hashtagsField, validateHashtags, messageError.errorNotValidateHastag, 2, true);
+pristine.addValidator(hashtagsField, validateHashtagsUnique, messageError.errorUniqueHashtag, 1, true);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -67,14 +72,14 @@ comments.addEventListener('keydown', (evt) =>{
   }
 });
 
+setEffectsSlider();
+
 function closeForm (){
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  //fileInput.value = '';
   form.reset();
-  //hashtagsField.value = '';
-  //comments.value = '';
   pristine.reset();
-  //messageError = '';
   document.removeEventListener('keydown', onDocumentKeydown);
+  resetScale();
+  resertEffects();
 }
