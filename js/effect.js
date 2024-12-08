@@ -51,7 +51,7 @@ const EFFECTS = [
 const DEFAULT_EFFECT = EFFECTS[0];
 
 const slider = document.querySelector('.effect-level__slider');
-const img = document.querySelector('.img-upload__preview img');
+const img = document.querySelector('.img-upload__preview');
 const effects = document.querySelector('.effects');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectsLevel = document.querySelector('.effect-level__value');
@@ -91,7 +91,7 @@ const updateSlider = () => {
 };
 
 const onEffectsChange = (evt) => {
-  if(!evt.target.classList.contains('effects_radio')){
+  if(!evt.target.classList.contains('effects__radio')){
     return;
   }
   chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
@@ -105,7 +105,7 @@ const onSliderUpdate = () => {
   effectsLevel.value = sliderValue;
 };
 
-const resertEffects = () => {
+const resetEffects = () => {
   chosenEffect = DEFAULT_EFFECT;
   updateSlider();
 };
@@ -116,4 +116,4 @@ const setEffectsSlider = () => {
   effects.addEventListener('change', onEffectsChange);
   slider.noUiSlider.on('update', onSliderUpdate);
 };
-export {resertEffects, setEffectsSlider};
+export {resetEffects, setEffectsSlider};

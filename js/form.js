@@ -1,5 +1,5 @@
 import { resetScale } from './scale.js';
-import {resertEffects, setEffectsSlider} from './effect.js';
+import {resetEffects, setEffectsSlider} from './effect.js';
 const fileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -81,5 +81,5 @@ function closeForm (){
   pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
   resetScale();
-  resertEffects();
+  resetEffects();
 }
