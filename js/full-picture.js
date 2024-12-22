@@ -1,5 +1,3 @@
-import './picture.js';
-
 const COMMENTS_PER_PORTION = 5;
 
 const userFullPhoto = document.querySelector('.big-picture');
