@@ -1,9 +1,12 @@
 import { resetScale } from './scale.js';
 import {resetEffects, setEffectsSlider} from './effect.js';
+import {sendForm} from './api.js';
+import { showSuccessMessage } from './message.js';
 const fileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 const overlay = document.querySelector('.img-upload__overlay');
 const buttonCloseForm = document.querySelector('.img-upload__cancel');
+const submitButton = document.querySelector('.img-upload__submit');
 const hashtagsField = document.querySelector('.text__hashtags');
 const comments = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
@@ -46,9 +49,6 @@ pristine.addValidator(hashtagsField, validateHashtagsCount, messageError.errorCo
 pristine.addValidator(hashtagsField, validateHashtags, messageError.errorNotValidateHastag, 2, true);
 pristine.addValidator(hashtagsField, validateHashtagsUnique, messageError.errorUniqueHashtag, 1, true);
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
 
 fileInput.addEventListener('change',() =>{
   overlay.classList.remove('hidden');
@@ -83,3 +83,24 @@ function closeForm (){
   resetScale();
   resetEffects();
 }
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'СОХРАНЯЮ...';
+}
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'ОПУБЛИКОВАТЬ';
+}
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if (isValid){
+    const formDate = new FormData(evt.target);
+    blockSubmitButton();
+    sendForm(formDate, closeForm);
+    unblockSubmitButton();
+  }
+});
