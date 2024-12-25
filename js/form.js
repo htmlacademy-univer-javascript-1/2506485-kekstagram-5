@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import {resetEffects, setEffectsSlider} from './effect.js';
 import {sendForm} from './api.js';
-import { showSuccessMessage } from './message.js';
+
 const fileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -10,11 +10,21 @@ const submitButton = document.querySelector('.img-upload__submit');
 const hashtagsField = document.querySelector('.text__hashtags');
 const comments = document.querySelector('.text__description');
 const form = document.querySelector('.img-upload__form');
+const previewPhoto = form.querySelector('.img-upload__preview img');
+const effectPreview = form.querySelectorAll('.effects__preview');
 const hashtagRegex = /^#[a-zа-яё0-9]{1,19}$/i;
+
 const messageError = {
   errorCountHashtag: 'превышено количество хэш-тегов',
   errorNotValidateHastag: 'введён невалидный хэш-тег',
   errorUniqueHashtag: 'хэш-теги повторяются'};
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+}
 
 const onDocumentKeydown = (evt) =>{
   if (evt.key === 'Escape'){
@@ -27,6 +37,15 @@ const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper'
 });
+
+const onFileInputChange = () => {
+  const file = fileInput.files[0];
+
+  if (file && isValidType(file)){
+    previewPhoto.src = URL.createObjectURL(file);
+    effectPreview.forEach((preview) => {preview.style.backgroundImage = `url('${previewPhoto.src}')`});
+  }
+}
 
 const normalizationHashtag = (hashtags) => hashtags.trim().split(' ').filter((tag) => Boolean(tag.length));
 
@@ -51,6 +70,7 @@ pristine.addValidator(hashtagsField, validateHashtagsUnique, messageError.errorU
 
 
 fileInput.addEventListener('change',() =>{
+  onFileInputChange();
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
