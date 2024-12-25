@@ -2,12 +2,16 @@ import { renderingPictures } from './picture.js';
 import { showAlert } from './util.js';
 import { showSuccessMessage } from './message.js';
 import { showErrorMessage } from './message.js';
+import { putFilter } from './filter.js';
+import { getfilteredPictures } from './filter.js';
+import { debounce } from './util.js';
 
 const loadPictures = () =>{
     fetch('https://29.javascript.htmlacademy.pro/kekstagram/data')
         .then((response) => response.json())
-        .then((ob) => {
-            renderingPictures(ob);
+        .then((pictures) => {
+            renderingPictures(getfilteredPictures(pictures));
+            putFilter(pictures, debounce(renderingPictures));
         })
         .catch(() => showAlert('Не удалось загрузить данные'));
 }

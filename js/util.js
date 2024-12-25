@@ -5,9 +5,9 @@ const getRandomInt = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomUniqueNumberGenerate = (a, b, usedArray) => {
+const getRandomUniqueNumberGenerate = (number_1, number_2, usedArray) => {
   const generator = () => {
-    const newNumber = getRandomInt(a, b);
+    const newNumber = getRandomInt(number_1, number_2);
     if (usedArray.includes(newNumber)){
       return generator ();
     }
@@ -39,4 +39,13 @@ const showAlert = (message) =>{
   }, alertShowTime);
 };
 
-export {getRandomInt, getRandomUniqueNumberGenerate, showAlert};
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getRandomInt, getRandomUniqueNumberGenerate, showAlert, debounce};
