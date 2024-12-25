@@ -8,9 +8,7 @@ const Filter = {
 const filterElement = document.querySelector('.img-filters');
 let pictures = [];
 let currentFilter = Filter.DEFAULT
-
 const sortByComments = (picture_1, picture_2) => picture_2.comments.length - picture_1.comments.length;
-
 const getfilteredPictures = (loadedPictures) =>{
     pictures = [...loadedPictures];
     if (Filter.DISCUSSED === currentFilter) {
