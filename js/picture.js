@@ -3,6 +3,7 @@ const similarListElement = document.querySelector('.pictures');
 const similarListFragment = document.createDocumentFragment();
 
 const renderingPictures = (pictures) =>{
+  similarListElement.querySelectorAll('.picture').forEach((oldPicture) => (oldPicture.remove()));
   pictures.forEach((picture) => {
     const elementPictures = templatePicture.cloneNode(true);
     elementPictures.querySelector('.picture__img').src = picture.url;
