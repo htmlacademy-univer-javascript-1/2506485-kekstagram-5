@@ -12,7 +12,7 @@ const fullPicturesDescription = userFullPhoto.querySelector('.social__caption');
 const addCommentsButton = document.querySelector('.social__comments-loader');
 const commentsCount = userFullPhoto.querySelector('.social__comment-count');
 
-const renderingComments = (arrayComments, i, countClickOnButton) =>{
+const renderComments = (arrayComments, i, countClickOnButton) =>{
   const element = document.createElement('li');
   element.classList.add('social__comment');
   const image = document.createElement('img');
@@ -33,9 +33,13 @@ const addComments = (arrayComments, countClickOnButton) => {
   const length = arrayComments.length;
   for (let i = 0; i < 5; i++){
     if (length > (countClickOnButton * COMMENTS_PER_PORTION + i)){
-      renderingComments(arrayComments, i, countClickOnButton);
+      renderComments(arrayComments, i, countClickOnButton);
     }
-    commentsCount.textContent = `${document.querySelectorAll('.social__comment').length} из ${length} комментариев`;
+    const socialComments = document.querySelectorAll('.social__comment');
+    commentsCount.textContent = `${socialComments.length} из ${length} комментариев`;
+    if (length === socialComments.length){
+      addCommentsButton.classList.add('hidden');
+    }
   }
 };
 
@@ -67,7 +71,7 @@ const onDocumentKeydown = (evt) =>{
 function closeFullFoto (){
   userFullPhoto.classList.add('hidden');
   body.classList.remove('modal-open');
-
+  addCommentsButton.classList.remove('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 

@@ -1,6 +1,7 @@
 import { resetScale } from './scale.js';
 import {resetEffects, setEffectsSlider} from './effect.js';
 import {sendForm} from './api.js';
+import { isShowMessage } from './message.js';
 
 const fileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
@@ -24,10 +25,10 @@ const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const isValidType = (file) => {
   const fileName = file.name.toLowerCase();
   return FILE_TYPES.some((it) => fileName.endsWith(it));
-}
+};
 
 const onDocumentKeydown = (evt) =>{
-  if (evt.key === 'Escape'){
+  if (evt.key === 'Escape' && !isShowMessage){
     evt.preventDefault();
     closeForm();
   }
@@ -43,9 +44,13 @@ const onFileInputChange = () => {
 
   if (file && isValidType(file)){
     previewPhoto.src = URL.createObjectURL(file);
-    effectPreview.forEach((preview) => {preview.style.backgroundImage = `url('${previewPhoto.src}')`});
+    effectPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url('${previewPhoto.src}')`;
+    });
+    previewPhoto.width = 600;
+    previewPhoto.height = 600;
   }
-}
+};
 
 const normalizationHashtag = (hashtags) => hashtags.trim().split(' ').filter((tag) => Boolean(tag.length));
 
@@ -107,12 +112,12 @@ function closeForm (){
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'СОХРАНЯЮ...';
-}
+};
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'ОПУБЛИКОВАТЬ';
-}
+};
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

@@ -5,17 +5,17 @@ const getRandomInt = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomUniqueNumberGenerate = (number_1, number_2, usedArray) => {
-  const generator = () => {
-    const newNumber = getRandomInt(number_1, number_2);
+const getRandomUniqueNumberGenerate = (number1, number2, usedArray) => {
+  const generate = () => {
+    const newNumber = getRandomInt(number1, number2);
     if (usedArray.includes(newNumber)){
-      return generator ();
+      return generate ();
     }
     usedArray.push(newNumber);
     return newNumber;
   };
 
-  return generator();
+  return generate();
 };
 
 const alertShowTime = 5000;
