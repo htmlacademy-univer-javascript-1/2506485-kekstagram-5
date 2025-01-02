@@ -96,6 +96,8 @@ const onEffectsChange = (evt) => {
   }
   chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
   img.className = `effects__preview--${chosenEffect.name}`;
+  img.width = 600;
+  img.height = 600;
   updateSlider();
 };
 
